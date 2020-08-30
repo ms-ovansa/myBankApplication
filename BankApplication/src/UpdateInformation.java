@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UpdateInformation implements ActionListener {
     JFrame frame;
@@ -71,6 +75,30 @@ public class UpdateInformation implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if (e.getSource() == updateButton) {
+                    try {
+                        //Creating Connection Object
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RegistrationDB", "root", "sashu");
+                        //Preapared Statement
+                        PreparedStatement Pstatement = connection.prepareStatement("insert into updatenewuser values(?,?,?,?,?)");
+                        //Specifying the values of it's parameter
+                        Pstatement.setString(1, DobTextField.getText());
+                        Pstatement.setString(2,PhoneTextField.getText());
+                        Pstatement.setString(3, NextofKinField.getText());
+                        Pstatement.setString(4,NokAddressField.getText());
+                        Pstatement.setString(5, NoKPhoneTextField.getText());
+
+                        //Executing query
+                        Pstatement.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Data Registered Successfully");
+
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+
+
+                }
+
 
                 JOptionPane.showMessageDialog(updateButton, "Data successfully updated ", "Alert", JOptionPane.PLAIN_MESSAGE);
 
@@ -81,7 +109,15 @@ public class UpdateInformation implements ActionListener {
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == resetButton) {
+                    //Clearing Fields
+                    DobTextField.setText("");
+                    PhoneTextField.setText("");
+                   NextofKinField.setText("");
+                    NokAddressField.setText("");
+                   NoKPhoneTextField.setText("");
 
+                }
 
                 JOptionPane.showMessageDialog(resetButton, "Please complete your registration ", "Alert", JOptionPane.WARNING_MESSAGE);
 

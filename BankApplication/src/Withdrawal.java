@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Withdrawal implements ActionListener {
     JFrame frame;
+    JLabel wordLabel = new JLabel();
     JLabel BalanceLabel = new JLabel("#0.00 ");
     JTextField withdrawInFiguresLabel = new JTextField("Amount in Figures ");
     JButton Withdraw = new JButton("Withdraw");
@@ -29,6 +30,10 @@ public class Withdrawal implements ActionListener {
     }
 
     public void setLocationAndSize() {
+        wordLabel.setBounds(130, 20, 500, 35);
+        wordLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        wordLabel.setText("Welcome to Ovansa Bank your! Your current account balance is:  " );
+        BalanceLabel.setText("0.00");
         BalanceLabel.setBounds(280, 50, 500, 35);
         //BalanceLabel.setForeground(new java.awt.Color(128, 0, 0));
         BalanceLabel.setFont(new Font("Serif", Font.BOLD, 40));
@@ -48,13 +53,19 @@ public class Withdrawal implements ActionListener {
         frame.add(withdrawInFiguresLabel);
         frame.add(Withdraw);
         frame.add(cancel);
+        frame.add(wordLabel);
     }
 
     public void actionEvent() {
         Withdraw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                double amount = Double.parseDouble(withdrawInFiguresLabel.getText());
+                if (amount >100) {
+                    JOptionPane.showMessageDialog(null, "Enter an amount to withdraw");
+                }else if (e.getSource()==Withdraw){
 
+                }
 
                 JOptionPane.showMessageDialog(Withdraw, "Transaction successful your new account balance is : ", "Alert", JOptionPane.PLAIN_MESSAGE);
 

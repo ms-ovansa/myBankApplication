@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 public class ConfirmationScreen implements ActionListener {
     JFrame frame;
     JLabel WelcomeLabel = new JLabel("WELCOME TO OVANSA BANK ");
-    JLabel successlabel = new JLabel("Your Data has been successfully registered. You may choose your next transaction");
-    JButton depositBtn = new JButton("Deposit");
+    JLabel successlabel = new JLabel(" Please select your next transaction from the given menu ");
+    JButton depositBtn = new JButton("Payments");
     JButton UpdateBtn = new JButton("Update Information");
 
     ConfirmationScreen() {
@@ -21,7 +21,7 @@ public class ConfirmationScreen implements ActionListener {
                 new Deposits();
                 frame.dispose();
 
-                JOptionPane.showMessageDialog(depositBtn, "Welcome, how much money you wan put?", "Alert", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(depositBtn, "Welcome!", "Alert", JOptionPane.PLAIN_MESSAGE);
 
 
             }
